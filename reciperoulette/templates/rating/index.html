@@ -13,4 +13,11 @@
     <input type="hidden" name="recipe" value="{{recipe['id']}}">
     <input type="submit" value="Rate Recipe">
   </form>
+  <hr />
+  Recommendations:
+  <ul>
+    {% for recipe in recommendations %}
+      <li>{{recipe[1]}}</li>
+    {% endfor %}
+  </ul>
 {% endblock %}

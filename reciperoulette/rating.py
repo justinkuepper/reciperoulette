@@ -6,6 +6,8 @@ from werkzeug.exceptions import abort
 from reciperoulette.auth import login_required
 from reciperoulette.db import get_db
 
+from reciperoulette import recommender
+
 bp = Blueprint('rating', __name__)
 
 @bp.route('/create', methods=('GET', 'POST'))
@@ -34,4 +36,5 @@ def create():
             ' ORDER BY RANDOM() LIMIT 1',
             (g.user['id'],)
         ).fetchone()
-        return render_template('rating/index.html', recipe=recipe)
+        recommendations = recommender.getRecommendations(g.user['id'])
+        return render_template('rating/index.html', recipe=recipe, recommendations=recommendations)
