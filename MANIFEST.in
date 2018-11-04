@@ -1,0 +1,4 @@
+include reciperoulette/schema.sql
+graft reciperoulette/static
+graft reciperoulette/templates
+global-exclude *.pyc

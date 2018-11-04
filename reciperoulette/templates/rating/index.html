@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Rate Recipes{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <img src="{{recipe['image_url']}}" />
+  <br />
+  <form method="post">
+    <label for="rating">Rating:</label>
+    <input type="range" min="1" max="5" value="3" name="rating" id="rating">
+    <input type="hidden" name="recipe" value="{{recipe['id']}}">
+    <input type="submit" value="Rate Recipe">
+  </form>
+{% endblock %}
