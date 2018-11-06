@@ -1,23 +1,42 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Rate Recipes{% endblock %}</h1>
+  <h1 class="h3 mb-5 font-weight-normal">{% block title %}Try this...{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
-  <img src="{{recipe['image_url']}}" />
-  <br />
-  <form method="post">
-    <label for="rating">Rating:</label>
-    <input type="range" min="1" max="5" value="3" name="rating" id="rating">
-    <input type="hidden" name="recipe" value="{{recipe['id']}}">
-    <input type="submit" value="Rate Recipe">
-  </form>
-  <hr />
-  Recommendations:
-  <ul>
-    {% for recipe in recommendations %}
-      <li>{{recipe[1]}}</li>
-    {% endfor %}
-  </ul>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+        <img class="card-img-left w-50 h-auto rounded-left" src="{{recipe['image_url']}}" alt="Recipe to Rate">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{recipe['title']}}</h5>
+          <p>Description of the recipe...</p>
+          <a href="{{recipe['link']}}" class="card-link">Make Recipe</a>
+          <hr />
+          <p class="card-text">Rate this recipe:</p>
+          <form method="post" style="width: 100%;">
+            <label for="rating" class="sr-only">Rating:</label>
+            <input type="range" min="1" max="5" value="3" name="rating" id="rating" class="form-control-range mb-4">
+            <input type="hidden" name="recipe" value="{{recipe['id']}}">
+            <input type="submit" value="Rate Recipe" class="btn btn-lg btn-primary btn-block">
+          </form>
+        </div>
+      </div>
+      {% if recommendations %}
+        <h3 class="h3 mt-5 mb-5 font-weight normal">You may also like...</h3>
+        <div class="card-columns">
+          {% for recipe in recommendations %}
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{{recipe[1]}}</h5>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="text-muted">Rate more recipes to receive recommendations.</p>
+      {% endif %}
+    </div>
+  </div>
 {% endblock %}
