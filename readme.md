@@ -1,6 +1,14 @@
 # Recipe Roulette
 
-Recipe Roulette is an evolving experiment in applying machine learning to meal planning.
+Recipe Roulette makes meal planning easier with machine learning and artificial intelligence.
+
+![Screenshot](screenshot.png)
+
+## Project Status
+
+This project is currently in development. Users can sign up, sign in, sign out, rate recipes, and receive recommendations based on their similarity to other users (collaborative filtering).
+
+The long-term goal is to deploy a web application where users can view recommended recipes, save their own recipes, and rate recipes that they cook to fine-tune the recommendations. This may include the addition of item-based filtering or deep learning models using ingredient and taste vectors.
 
 ## Getting Started
 
@@ -14,7 +22,7 @@ After you install the package, initialize and seed the database:
 
 `flask init-db`
 
-The script will automatically import ~20 recipes.
+The script will automatically import ~20 recipes from AllRecipes.com.
 
 ## Use
 
@@ -30,14 +38,8 @@ The current options are:
 * Euclidean Distance: `similarity=sim_distance`
 * Pearson Coefficient: `similarity=sim_pearson`
 
-## What's Next?
+## Interested?
 
-This project will be live on its own domain in the near-term.
+If you're interested in this line of work, please contact me or even submit a pull request to this project.
 
-The long-term goal is to experiment with other forms of machine learning and eventually evolve the app into a more full-fledged meal planner that optimizes for taste and nutrition.
-
-## Contributors & Legalese
-
-If you're interested in contributing, please open a pull request and I'm happy to review it!
-
-Recipe Roulette is copyright (C) 2018 Justin Kuepper. It's licensed under the MIT License.
+Recipe Roulette is licensed under the MIT License.
