@@ -10,9 +10,9 @@ from reciperoulette import recommender
 
 bp = Blueprint('rating', __name__)
 
-@bp.route('/create', methods=('GET', 'POST'))
+@bp.route('/', methods=('GET', 'POST'))
 @login_required
-def create():
+def index():
     if request.method == 'POST':
         rating = request.form['rating']
         recipe_id = request.form['recipe']
@@ -27,7 +27,7 @@ def create():
                 (recipe_id, g.user['id'], rating)
             )
             db.commit()
-            return redirect('/create')
+            return redirect('/')
     else:
         db = get_db()
         recipe = db.execute(
@@ -37,4 +37,9 @@ def create():
             (g.user['id'],)
         ).fetchone()
         recommendations = recommender.getRecommendations(g.user['id'])
-        return render_template('rating/index.html', recipe=recipe, recommendations=recommendations)
+        recommendation_ids = [x[1] for x in recommendations]
+        recommendation_ids_sql = tuple(recommendation_ids)
+        recommended_recipes = db.execute(
+            'SELECT * FROM recipe WHERE id IN {}'.format(recommendation_ids_sql)
+        )
+        return render_template('rating/index.html', recipe=recipe, recommendations=recommended_recipes)

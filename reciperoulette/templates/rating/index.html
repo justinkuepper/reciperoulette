@@ -28,8 +28,10 @@
         <div class="card-columns">
           {% for recipe in recommendations %}
             <div class="card">
+              <img class="card-img-top" src="{{recipe['image_url']}}" alt="Recipe to Try">
               <div class="card-body">
-                <h5 class="card-title">{{recipe[1]}}</h5>
+                <h5 class="card-title">{{recipe['title']}}</h5>
+                <a href="{{recipe['link']}}" class="card-link">Make Recipe</a>
               </div>
             </div>
           {% endfor %}
